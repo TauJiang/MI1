@@ -29,6 +29,9 @@ namespace IKManager
         private float[] minAngle = new float[6];            // limits of joint rotatation
         private float[] maxAngle = new float[6];
 
+        private int count = 0;
+        private int reverse = 1;
+
         void Start()
         {
             // slider settings
@@ -96,8 +99,29 @@ namespace IKManager
             RRef.y = sliderVal[4];
             RRef.z = sliderVal[5];
 
-            // IK
+            // PRef.x = 0.1f - count * 0.01f;
+            // PRef.y = 0.6f + count * 0.01f;
+            // RRef.y = 180f;
+
+            // if (PRef.x < -0.1)
+            // {
+            //     reverse = -1;
+            // }
+            // if (PRef.x > 0.1)
+            // {
+            //     reverse = 1;
+            // }
+            // count += reverse;
+            // print("PX " + PRef.x);
+            // print("Count1 " + count);
             CalcIK();
+
+            // // for (int i = 0; i < 6; i++)
+            // // {
+            // //     PRef.x = 0.1f - 0.05f*i;
+            // //     print("PX " + PRef.x);
+            // //     CalcIK();
+            // // }
         }
 
         void CalcIK()

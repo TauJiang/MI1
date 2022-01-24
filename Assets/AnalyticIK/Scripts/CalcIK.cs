@@ -32,6 +32,8 @@ public class CalcIK : MonoBehaviour {
 	private float prevPx, prevPy, prevPz;  // to avoid impossible pose
 	private float prevRx, prevRy, prevRz;
 
+    private int count;
+
     // Use this for initialization
     void Start () {
         theta[0] = theta[1] = theta[2] = theta[3] = theta[4] = theta[5] = 0.0;
@@ -64,6 +66,7 @@ public class CalcIK : MonoBehaviour {
 		pxText.text = px.ToString ("F2");
         py = L_Slider.value;
 		pyText.text = py.ToString ("F2");
+        py = 8;
         pz = U_Slider.value;
 		pzText.text = pz.ToString ("F2");
         rx = R_Slider.value;
@@ -71,6 +74,8 @@ public class CalcIK : MonoBehaviour {
         ry = B_Slider.value;
 		ryText.text = ry.ToString ("F2");
         rz = T_Slider.value;
+        // rz = count % 360;
+        // rz = 180;
 		rzText.text = rz.ToString ("F2");
 
         ax = Mathf.Cos(rz * 3.14f / 180.0f) * Mathf.Cos(ry * 3.14f / 180.0f);
@@ -143,6 +148,8 @@ public class CalcIK : MonoBehaviour {
 		prevRx = rx;
 		prevRy = ry;
 		prevRz = rz;
+        print(px);
+        count ++;
     }
 
 	void reset_slider(){
