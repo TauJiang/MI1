@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 namespace AnalyticIK
 {
@@ -32,7 +33,8 @@ public class CalcIK : MonoBehaviour {
 	private float prevPx, prevPy, prevPz;  // to avoid impossible pose
 	private float prevRx, prevRy, prevRz;
 
-    private int count;
+    private float count = 0;
+    private float moved = 0;
 
     // Use this for initialization
     void Start () {
@@ -55,6 +57,7 @@ public class CalcIK : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Math.Sin((count * (Math.PI)) / 180);
         float px, py, pz;
         float rx, ry, rz;
         float ax, ay, az, bx, by, bz;
@@ -62,20 +65,67 @@ public class CalcIK : MonoBehaviour {
         float p5x, p5y, p5z;
         float C1, C23, S1, S23;
 
+        // // Unprogrammed Mode of Spray
+        // px = S_Slider.value;
+        // // px = (float)Math.Sin((count * (Math.PI)) / 180) * 8f;
+		// pxText.text = px.ToString ("F2");
+        // py = L_Slider.value;
+        // // py = (float)Math.Cos((count * (Math.PI)) / 180) * 8f;
+		// pyText.text = py.ToString ("F2");
+        // pz = U_Slider.value;
+        // // pz = 14f - moved;
+        // pz = 14f;
+		// pzText.text = pz.ToString ("F2");
+        // rx = R_Slider.value;
+        // rx = 180f;
+		// rxText.text = rx.ToString ("F2");
+        // ry = B_Slider.value;
+        // // ry = moved * 10;
+		// ryText.text = ry.ToString ("F2");
+        // rz = T_Slider.value;
+        // // rz = - count;
+		// rzText.text = rz.ToString ("F2");
+
+        // Spinning Mode of Spray
+        // px = S_Slider.value;
+        // px = (float)Math.Sin((count * (Math.PI)) / 180) * 8f;
+		// pxText.text = px.ToString ("F2");
+        // py = L_Slider.value;
+        // py = (float)Math.Cos((count * (Math.PI)) / 180) * 8f;
+		// pyText.text = py.ToString ("F2");
+        // pz = U_Slider.value;
+        // pz = 14f - moved;
+        // pz = 14f;
+		// pzText.text = pz.ToString ("F2");
+        // rx = R_Slider.value;
+        // rx = 180f;
+		// rxText.text = rx.ToString ("F2");
+        // ry = B_Slider.value;
+        // ry = moved * 10;
+		// ryText.text = ry.ToString ("F2");
+        // rz = T_Slider.value;
+        // rz = - count;
+		// rzText.text = rz.ToString ("F2");
+
+        // car-seat clean Mode of Spray
         px = S_Slider.value;
+        // px = (float)Math.Sin((count * (Math.PI)) / 180) * 8f;
 		pxText.text = px.ToString ("F2");
         py = L_Slider.value;
+        // py = (float)Math.Cos((count * (Math.PI)) / 180) * 8f;
 		pyText.text = py.ToString ("F2");
-        py = 8;
         pz = U_Slider.value;
+        // pz = 14f - moved;
+        // pz = 14f;
 		pzText.text = pz.ToString ("F2");
         rx = R_Slider.value;
+        // rx = 180f;
 		rxText.text = rx.ToString ("F2");
         ry = B_Slider.value;
+        // ry = moved * 10;
 		ryText.text = ry.ToString ("F2");
         rz = T_Slider.value;
-        // rz = count % 360;
-        // rz = 180;
+        // rz = - count;
 		rzText.text = rz.ToString ("F2");
 
         ax = Mathf.Cos(rz * 3.14f / 180.0f) * Mathf.Cos(ry * 3.14f / 180.0f);
@@ -149,7 +199,11 @@ public class CalcIK : MonoBehaviour {
 		prevRy = ry;
 		prevRz = rz;
         print(px);
-        count ++;
+        if (count + 1 == 360){
+            print("moved");
+            moved += 1;
+        }
+        count  = (count + 1) % 360;
     }
 
 	void reset_slider(){
